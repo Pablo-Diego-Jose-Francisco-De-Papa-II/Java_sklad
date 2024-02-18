@@ -2,6 +2,13 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.Random;
 
+/*
+* add user difficulty
+* add helper
+* maybe keep score or increase dif... idek
+* obmedzeny pocet hintov
+* */
+
 public class GuessGame {
 
     public static void main(String[] args) {
@@ -9,24 +16,39 @@ public class GuessGame {
         Random rand = new Random();
 
         System.out.println("Welcome to Guess the Number Game!");
-        final int guessing_num = rand.nextInt(10) + 1;
+        int guessing_num = rand.nextInt(10) + 1;
+        String guessingNumString = Integer.toString(rand.nextInt(10) + 1);
+        Integer last_num = null;
+
 
         while (true) {
-            try {
-                System.out.print("Guess number: ");
-                int guess = input.nextInt();
+            System.out.print("Guess number: ");
+            String guess = input.next();
 
-                if (guessing_num == guess) {
-                    System.out.println("You won! The number was " + guessing_num);
-                    break;
+            if (guess.equals(guessingNumString)) {
+                System.out.println("You won! The number was " + guessing_num);
+                break;
 
-                } else {
-                    System.out.println("You guessed wrong! Try again...");
+
+            } else if (guess.equals("hint")) {
+                try {
+
+                    if (last_num > guessing_num) { System.out.println("Lower"); }
+                    else { System.out.println("Upper"); }
+
+                } catch (NullPointerException e) {
+                    System.out.println("niga");
                 }
 
-            } catch (InputMismatchException e) {
-                System.out.println("Invalid input. Next time enter a number.");
-                input.next();
+
+            } else {
+                try {
+                    last_num = Integer.valueOf(guess);
+                    System.out.println("You guessed wrong! Try again...");
+
+                } catch (NumberFormatException kys) {
+                    System.out.println("cislo");
+                }
             }
         }
     }
