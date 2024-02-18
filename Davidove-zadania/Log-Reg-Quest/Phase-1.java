@@ -1,41 +1,54 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.util.ArrayList;
+import java.util.Random;
 
-public class Davitov_vadny_login_register_pindik {
-    
+/*
+* add user difficulty
+* add helper
+* maybe keep score or increase dif... idek
+* obmedzeny pocet hintov
+* */
+
+public class GuessGame {
+
     public static void main(String[] args) {
-        
         Scanner input = new Scanner(System.in);
-        ArrayList<String> names = new ArrayList<String>();
+        Random rand = new Random();
 
-        System.out.println("-> type \"show\" to see registered students\n-> type \"end\" to end program");
+        System.out.println("Welcome to Guess the Number Game!");
+        int guessing_num = rand.nextInt(10) + 1;
+        String guessingNumString = Integer.toString(rand.nextInt(10) + 1);
+        Integer last_num = null;
 
-        while(true) {
-            System.out.print("Register a new student or you will be punished: ");
-            String inputed_material = input.next();
+
+        while (true) {
+            System.out.print("Guess number: ");
+            String guess = input.next();
+
+            if (guess.equals(guessingNumString)) {
+                System.out.println("You won! The number was " + guessing_num);
+                break;
 
 
-            switch (inputed_material) {
-                case "show":
-                    for (String name : names) {
-                        System.out.print(name + " ");
-                    }
-                    System.out.print("\n");
-                    break;
+            } else if (guess.equals("hint")) {
+                try {
 
-                case "end":
-                    System.out.print("List of students: ");
-                    for (String name : names) {
-                        System.out.println(name + " ");
-                    }
-                    return;
+                    if (last_num > guessing_num) { System.out.println("Lower"); }
+                    else { System.out.println("Upper"); }
 
-                default:
-                    if (names.contains(inputed_material)) {
-                        System.out.println("Student already in our database");
-                    } else {
-                        names.add(inputed_material);
-                    }
+                } catch (NullPointerException e) {
+                    System.out.println("niga");
+                }
+
+
+            } else {
+                try {
+                    last_num = Integer.valueOf(guess);
+                    System.out.println("You guessed wrong! Try again...");
+
+                } catch (NumberFormatException kys) {
+                    System.out.println("cislo");
+                }
             }
         }
     }
