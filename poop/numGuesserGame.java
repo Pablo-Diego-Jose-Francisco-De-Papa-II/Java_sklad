@@ -3,7 +3,7 @@ import java.util.Random;
 import java.lang.Math;
 
 /* todo list
-* add user difficulty
+* add user difficulty 
 * add helper ✅
 * maybe keep score
 * progressively increase dif
@@ -28,7 +28,8 @@ public class GuessGame {
         System.out.print("\nWhat mode you want to play: ");
 
         while (shouldRun) {
-            switch (input.next().trim().toLowerCase()) {
+            switch (input.nextLine().trim().toLowerCase()) {
+
                 case "classic" -> {
                     minNum = 1;
                     maxNum = 10;
@@ -47,7 +48,7 @@ public class GuessGame {
 
                 case "custom" -> {
                     System.out.print("\nSet a range \"num - num\": ");
-                    String nums = input.next();
+                    String nums = input.nextLine();
                     String[] idk = nums.trim().split("-");
 
                     minNum = Integer.parseInt(idk[0].trim());
@@ -63,12 +64,12 @@ public class GuessGame {
 
 
         String randomNumberStr = Integer.toString(randomNumber);
-        System.out.println("How to play: 1.Guess number between " + minNum + "-" + maxNum);
+        System.out.println("How to play: 1.Guess number between " + minNum + " - " + maxNum);
 
 
         while (true) {
             System.out.print("Guess number: ");
-            String guess = input.next().trim();
+            String guess = input.nextLine().trim();
 
             if (guess.equals(randomNumberStr)) {
                 System.out.println("You won! The number was " + randomNumber);
