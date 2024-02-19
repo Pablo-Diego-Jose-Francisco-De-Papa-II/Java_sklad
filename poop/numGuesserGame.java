@@ -40,6 +40,7 @@ public class GuessGame {
                     System.out.print("\nWith how many digits you wanna play: ");
 
                     String digits = input.nextLine().trim();
+
                     if (numCheck(digits) != null) {
                         minNum = 1;
                         maxNum = (int) Math.pow(10, Integer.parseInt(digits)) - 1;
@@ -56,20 +57,20 @@ public class GuessGame {
                     String[] idk = nums.trim().split("-");
 
                     if (numCheck(idk[0].trim()) != null && numCheck(idk[1].trim()) != null){
-                        minNum = Integer.parseInt(idk[0].trim());
-                        maxNum = Integer.parseInt(idk[1].trim());
+                        minNum = numCheck(idk[0].trim());
+                        maxNum = numCheck(idk[1].trim());
+
                         randomNumber = rand.nextInt(maxNum - minNum + 1) + minNum;
 
                         shouldRun = false;
                     }
                 }
+                default -> System.out.println("");
             }
         }
 
-
         String randomNumberStr = Integer.toString(randomNumber);
         System.out.println("Your goal is to guess number between " + minNum + " - " + maxNum + "!");
-
 
         while (true) {
             System.out.print("Guess number: ");
@@ -82,9 +83,9 @@ public class GuessGame {
 
             if (guess.equals("hint")) {
                 System.out.println(randomNumberStr);
+
                 if (lastNum == null) {
                     System.out.println("You haven't guessed yet dumbass!");
-
                 } else {
                     System.out.println(lastNum > randomNumber ? "Lower" : "Upper");
                 }
