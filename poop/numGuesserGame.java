@@ -16,9 +16,37 @@ public class GuessGame {
         Random rand = new Random();
 
         System.out.println("Welcome to Guess the Number Game!");
+
+
+        System.out.print("\nWhat mode you want to play: ");
+        String mode = input.next();
+
+        Integer minNum = null;
+        Integer maxNum = null;
+
+        switch (mode) {
+            case "classic":
+                minNum = 1;
+                maxNum = 10;
+                System.out.println("classic\n");
+                break;
+
+            case "normal":
+                minNum = 1;
+                System.out.println("normal\n");
+                break;
+
+            case "custom":
+                System.out.println("custom\n");
+                break;
+        }
+
+
         int randomNumber = rand.nextInt(10) + 1;
         String randomNumberStr = Integer.toString(randomNumber);
         Integer lastNum = null;
+
+        System.out.println("How to play: 1.Guess number between " + minNum + "-" + maxNum);
 
 
         while (true) {
