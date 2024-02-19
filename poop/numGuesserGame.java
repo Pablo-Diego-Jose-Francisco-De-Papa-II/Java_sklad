@@ -42,18 +42,13 @@ public class GuessGame {
                 case "normal" -> {
                     System.out.print("\nWith how many digits you wanna play: ");
 
-                    try {
-                        int digits = input.nextInt();
-                        minNum = 1;
-                        maxNum = (int) Math.pow(10, digits) - 1;
-                        randomNumber = rand.nextInt(maxNum) + minNum;
+                    String digits = input.nextLine();
+                    numCheck(digits);
+                    minNum = 1;
+                    maxNum = (int) Math.pow(10, Integer.parseInt(digits)) - 1;
+                    randomNumber = rand.nextInt(maxNum) + minNum;
 
-                        shouldRun = false;
-
-                    } catch (InputMismatchException e) {
-                        System.out.println("Invalid input. Next time enter a number.");
-                    }
-
+                    shouldRun = false;
                 }
 
                 case "custom" -> {
@@ -111,6 +106,17 @@ public class GuessGame {
                     System.out.println("Invalid input. Next time enter a number.");
                 }
             }
+        }
+    }
+
+    
+    public static Integer numCheck(String str) {
+        try {
+            return Integer.parseInt(str);
+
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Next time enter a number.");
+            return null;
         }
     }
 }
