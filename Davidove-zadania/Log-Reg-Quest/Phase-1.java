@@ -36,6 +36,7 @@ public class Davitov_vadny_login_register_pindik {
                     } else {
                         names.add(inputed_material);
                     }
+                }
             }
         }
-    }
+    }    
