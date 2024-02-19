@@ -4,7 +4,7 @@ import java.util.Random;
 import java.lang.Math;
 
 /* todo list
-* add user difficulty
+* add user difficulty ✅
 * add helper ✅
 * maybe keep score
 * progressively increase dif
@@ -43,12 +43,17 @@ public class GuessGame {
                     System.out.print("\nWith how many digits you wanna play: ");
 
                     String digits = input.nextLine();
-                    numCheck(digits);
-                    minNum = 1;
-                    maxNum = (int) Math.pow(10, Integer.parseInt(digits)) - 1;
-                    randomNumber = rand.nextInt(maxNum) + minNum;
+                    if (numCheck(digits) != null) {
+                        minNum = 1;
+                        maxNum = (int) Math.pow(10, Integer.parseInt(digits)) - 1;
+                        randomNumber = rand.nextInt(maxNum) + minNum;
 
-                    shouldRun = false;
+                        shouldRun = false;
+
+                    } else {
+                        System.out.println("Invalid input. Next time enter a number.");
+                    }
+
                 }
 
                 case "custom" -> {
@@ -113,9 +118,7 @@ public class GuessGame {
     public static Integer numCheck(String str) {
         try {
             return Integer.parseInt(str);
-
         } catch (NumberFormatException e) {
-            System.out.println("Invalid input. Next time enter a number.");
             return null;
         }
     }
