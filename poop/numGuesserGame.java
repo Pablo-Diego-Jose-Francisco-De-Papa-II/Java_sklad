@@ -18,7 +18,7 @@ public class GuessGame {
 
         System.out.println("Welcome to Guess the Number Game!");
 
-        boolean idk = true;
+        boolean shouldRun = true;
         Integer minNum = null;
         Integer maxNum = null;
         Integer lastNum = null;
@@ -27,15 +27,13 @@ public class GuessGame {
 
         System.out.print("\nWhat mode you want to play: ");
 
-        while (idk) {
-            String mode = input.next();
-
-            switch (mode) {
+        while (shouldRun) {
+            switch (input.next().trim().toLowerCase()) {
                 case "classic" -> {
                     minNum = 1;
                     maxNum = 10;
                     randomNumber = rand.nextInt(maxNum - minNum + 1) + minNum;
-                    idk = false;
+                    shouldRun = false;
                 }
 
                 case "normal" -> {
@@ -44,15 +42,22 @@ public class GuessGame {
                     minNum = 1;
                     maxNum = (int) Math.pow(10, digits) - 1;
                     randomNumber = rand.nextInt(maxNum - minNum + 1) + minNum;
-                    idk = false;
+                    shouldRun = false;
                 }
 
-                /*case "custom" -> {
-                    System.out.println("custom\n");
-                    idk = false;
-                }*/
+                case "custom" -> {
+                    System.out.print("\nSet a range \"num - num\": ");
+                    String nums = input.next();
+                    String[] idk = nums.trim().split("-");
 
-                default -> System.out.println("Learn how to write niga");
+                    minNum = Integer.parseInt(idk[0].trim());
+                    maxNum = Integer.parseInt(idk[1].trim());
+                    randomNumber = rand.nextInt(maxNum - minNum + 1) + minNum;
+
+                    shouldRun = false;
+                }
+
+                default -> System.out.println("Learn how to write");
             }
         }
 
@@ -71,6 +76,7 @@ public class GuessGame {
             }
 
             if (guess.equals("hint")) {
+                System.out.println(randomNumberStr);
                 if (lastNum == null) {
                     System.out.println("You haven't guessed yet dumbass!");
 
