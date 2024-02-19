@@ -11,7 +11,7 @@ import java.lang.Math;
 * */
 
 public class GuessGame {
-    
+
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         Random rand = new Random();
@@ -24,10 +24,8 @@ public class GuessGame {
         Integer lastNum = null;
         Integer randomNumber = null;
 
-
-        System.out.print("\nWhat mode you want to play: ");
-
         while (shouldRun) {
+            System.out.print("\nWhat mode you want to play: ");
             switch (input.nextLine().trim().toLowerCase()) {
 
                 case "classic" -> {
@@ -41,7 +39,7 @@ public class GuessGame {
                 case "normal" -> {
                     System.out.print("\nWith how many digits you wanna play: ");
 
-                    String digits = input.nextLine();
+                    String digits = input.nextLine().trim();
                     if (numCheck(digits) != null) {
                         minNum = 1;
                         maxNum = (int) Math.pow(10, Integer.parseInt(digits)) - 1;
@@ -54,23 +52,17 @@ public class GuessGame {
                 case "custom" -> {
                     System.out.print("\nSet a range \"num - num\": ");
 
-                    try {
-                        String nums = input.nextLine();
-                        String[] idk = nums.trim().split("-");
+                    String nums = input.nextLine();
+                    String[] idk = nums.trim().split("-");
 
+                    if (numCheck(idk[0].trim()) != null && numCheck(idk[1].trim()) != null){
                         minNum = Integer.parseInt(idk[0].trim());
                         maxNum = Integer.parseInt(idk[1].trim());
                         randomNumber = rand.nextInt(maxNum - minNum + 1) + minNum;
 
                         shouldRun = false;
-
-                    } catch (NumberFormatException e) {
-                        System.out.println("Invalid input. Next time enter a number.");
                     }
-
                 }
-
-                default -> System.out.print("\nWhat mode you want to play: ");
             }
         }
 
@@ -98,12 +90,9 @@ public class GuessGame {
                 }
 
             } else {
-                try {
-                    lastNum = Integer.valueOf(guess);
-                    System.out.println("You guessed wrong! Try again...");
 
-                } catch (NumberFormatException kys) {
-                    System.out.println("Invalid input. Next time enter a number.");
+                if (numCheck(guess) != null) {
+                    System.out.println("You guessed wrong! Try again...");
                 }
             }
         }
