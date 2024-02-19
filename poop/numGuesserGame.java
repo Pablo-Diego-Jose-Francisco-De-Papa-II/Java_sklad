@@ -1,4 +1,3 @@
-import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.Random;
 import java.lang.Math;
@@ -12,7 +11,7 @@ import java.lang.Math;
 * */
 
 public class GuessGame {
-
+    
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         Random rand = new Random();
@@ -49,11 +48,7 @@ public class GuessGame {
                         randomNumber = rand.nextInt(maxNum) + minNum;
 
                         shouldRun = false;
-
-                    } else {
-                        System.out.println("Invalid input. Next time enter a number.");
                     }
-
                 }
 
                 case "custom" -> {
@@ -114,11 +109,11 @@ public class GuessGame {
         }
     }
 
-    
     public static Integer numCheck(String str) {
         try {
             return Integer.parseInt(str);
         } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Next time enter a number.");
             return null;
         }
     }
