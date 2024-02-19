@@ -54,7 +54,7 @@ public class GuessGame {
                     System.out.print("\nSet a range \"num - num\": ");
 
                     String nums = input.nextLine();
-                    String[] idk = nums.trim().split("-");
+                    String[] idk = nums.trim().split("[,-]");
 
                     if (numCheck(idk[0].trim()) != null && numCheck(idk[1].trim()) != null){
                         minNum = numCheck(idk[0].trim());
@@ -65,11 +65,11 @@ public class GuessGame {
                         shouldRun = false;
                     }
                 }
-                default -> System.out.println("");
+                default -> System.out.println("Enter valid mode name");
             }
         }
 
-        String randomNumberStr = Integer.toString(randomNumber);
+        final String randomNumberStr = Integer.toString(randomNumber);
         System.out.println("Your goal is to guess number between " + minNum + " - " + maxNum + "!");
 
         while (true) {
