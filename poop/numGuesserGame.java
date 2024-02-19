@@ -18,37 +18,46 @@ public class GuessGame {
 
         System.out.println("Welcome to Guess the Number Game!");
 
-
-        System.out.print("\nWhat mode you want to play: ");
-        String mode = input.next();
-
+        boolean idk = true;
         Integer minNum = null;
         Integer maxNum = null;
         Integer lastNum = null;
         Integer randomNumber = null;
 
-        switch (mode) {
-            case "classic":
-                minNum = 1;
-                maxNum = 10;
-                randomNumber = rand.nextInt(maxNum - minNum + 1) + minNum;
-                break;
 
-            case "normal":
-                System.out.print("\nWith how many digits you wanna play: ");
-                int digits = input.nextInt();
-                minNum = 1;
-                maxNum = (int) Math.pow(10, digits) - 1;
-                randomNumber = rand.nextInt(maxNum - minNum + 1) + minNum;
-                break;
+        System.out.print("\nWhat mode you want to play: ");
 
-            case "custom":
-                System.out.println("custom\n");
-                break;
+        while (idk) {
+            String mode = input.next();
+
+            switch (mode) {
+                case "classic" -> {
+                    minNum = 1;
+                    maxNum = 10;
+                    randomNumber = rand.nextInt(maxNum - minNum + 1) + minNum;
+                    idk = false;
+                }
+
+                case "normal" -> {
+                    System.out.print("\nWith how many digits you wanna play: ");
+                    int digits = input.nextInt();
+                    minNum = 1;
+                    maxNum = (int) Math.pow(10, digits) - 1;
+                    randomNumber = rand.nextInt(maxNum - minNum + 1) + minNum;
+                    idk = false;
+                }
+
+                /*case "custom" -> {
+                    System.out.println("custom\n");
+                    idk = false;
+                }*/
+
+                default -> System.out.println("Learn how to write niga");
+            }
         }
 
-        String randomNumberStr = Integer.toString(randomNumber);
 
+        String randomNumberStr = Integer.toString(randomNumber);
         System.out.println("How to play: 1.Guess number between " + minNum + "-" + maxNum);
 
 
