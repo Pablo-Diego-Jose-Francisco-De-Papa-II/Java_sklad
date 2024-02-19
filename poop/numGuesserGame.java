@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.util.Random;
+import java.lang.Math;
 
 /* todo list
 * add user difficulty
@@ -23,17 +24,22 @@ public class GuessGame {
 
         Integer minNum = null;
         Integer maxNum = null;
+        Integer lastNum = null;
+        Integer randomNumber = null;
 
         switch (mode) {
             case "classic":
                 minNum = 1;
                 maxNum = 10;
-                System.out.println("classic\n");
+                randomNumber = rand.nextInt(maxNum - minNum + 1) + minNum;
                 break;
 
             case "normal":
+                System.out.print("\nWith how many digits you wanna play: ");
+                int digits = input.nextInt();
                 minNum = 1;
-                System.out.println("normal\n");
+                maxNum = (int) Math.pow(10, digits) - 1;
+                randomNumber = rand.nextInt(maxNum - minNum + 1) + minNum;
                 break;
 
             case "custom":
@@ -41,10 +47,7 @@ public class GuessGame {
                 break;
         }
 
-
-        int randomNumber = rand.nextInt(10) + 1;
         String randomNumberStr = Integer.toString(randomNumber);
-        Integer lastNum = null;
 
         System.out.println("How to play: 1.Guess number between " + minNum + "-" + maxNum);
 
