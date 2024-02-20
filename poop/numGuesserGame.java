@@ -23,12 +23,14 @@ public class GuessGame {
         Integer maxNum = null;
         Integer lastNum = null;
         Integer randomNumber = null;
+        Integer attempts = null;
 
         while (shouldRun) {
             System.out.print("\nWhat mode you want to play: ");
             switch (input.nextLine().trim().toLowerCase()) {
 
                 case "classic" -> {
+                    attempts = 3;
                     minNum = 1;
                     maxNum = 10;
                     randomNumber = rand.nextInt(maxNum) + minNum;
@@ -42,6 +44,7 @@ public class GuessGame {
                     String digits = input.nextLine().trim();
 
                     if (numCheck(digits) != null) {
+                        attempts =  3 * Integer.parseInt(digits);
                         minNum = 1;
                         maxNum = (int) Math.pow(10, Integer.parseInt(digits)) - 1;
                         randomNumber = rand.nextInt(maxNum) + minNum;
@@ -82,15 +85,19 @@ public class GuessGame {
             }
 
             if (guess.equals("hint")) {
-                System.out.println(randomNumberStr);
-
-                if (lastNum == null) {
-                    System.out.println("You haven't guessed yet dumbass!");
+                if (attempts > 0) {
+                    if (lastNum == null) {
+                        System.out.println("You haven't guessed yet dumbass!");
+                    } else {
+                        attempts -= 1;
+                        System.out.println(lastNum > randomNumber ? "Lower" : "Upper");
+                    }
                 } else {
-                    System.out.println(lastNum > randomNumber ? "Lower" : "Upper");
+                    System.out.println("You don't have any hints left!");
                 }
 
             } else {
+                lastNum = Integer.valueOf(guess);
 
                 if (numCheck(guess) != null) {
                     System.out.println("You guessed wrong! Try again...");
@@ -98,6 +105,7 @@ public class GuessGame {
             }
         }
     }
+
 
     public static Integer numCheck(String str) {
         try {
