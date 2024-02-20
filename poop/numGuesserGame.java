@@ -44,9 +44,9 @@ public class GuessGame {
                     String digits = input.nextLine().trim();
 
                     if (numCheck(digits) != null) {
-                        attempts =  3 * Integer.parseInt(digits);
                         minNum = 1;
                         maxNum = (int) Math.pow(10, Integer.parseInt(digits)) - 1;
+                        attempts =  (maxNum - minNum) / 3;
                         randomNumber = rand.nextInt(maxNum) + minNum;
 
                         shouldRun = false;
@@ -59,16 +59,18 @@ public class GuessGame {
                     String nums = input.nextLine();
                     String[] idk = nums.trim().split("[,-]");
 
-                    if (numCheck(idk[0].trim()) != null && numCheck(idk[1].trim()) != null){
+                    if (numCheck(idk[0].trim()) != null && numCheck(idk[1].trim()) != null) {
                         minNum = numCheck(idk[0].trim());
                         maxNum = numCheck(idk[1].trim());
-
+                        attempts =  (maxNum - minNum) / 3;
                         randomNumber = rand.nextInt(maxNum - minNum + 1) + minNum;
 
                         shouldRun = false;
                     }
                 }
+
                 default -> System.out.println("Enter valid mode name");
+
             }
         }
 
