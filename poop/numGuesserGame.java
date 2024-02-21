@@ -7,7 +7,7 @@ import java.lang.Math;
 * add helper ✅
 * maybe keep score
 * progressively increase dif
-* obmedzeny pocet hintov
+* obmedzeny pocet hintov ✅
 * */
 
 public class GuessGame {
@@ -19,6 +19,8 @@ public class GuessGame {
         System.out.println("Welcome to Guess the Number Game!");
 
         boolean shouldRun = true;
+        Integer firstNum = null;
+        Integer secondNum = null;
         Integer minNum = null;
         Integer maxNum = null;
         Integer lastNum = null;
@@ -59,9 +61,12 @@ public class GuessGame {
                     String nums = input.nextLine();
                     String[] idk = nums.trim().split("[,-]");
 
-                    if (numCheck(idk[0].trim()) != null && numCheck(idk[1].trim()) != null) {
-                        minNum = numCheck(idk[0].trim());
-                        maxNum = numCheck(idk[1].trim());
+                    firstNum = numCheck(idk[0].trim());
+                    secondNum = numCheck(idk[1].trim());
+
+                    if (firstNum != null && secondNum != null) {
+                        minNum = Math.min(firstNum, secondNum);
+                        maxNum = Math.max(firstNum, secondNum);
                         attempts =  (maxNum - minNum) / 3;
                         randomNumber = rand.nextInt(maxNum - minNum + 1) + minNum;
 
