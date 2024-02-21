@@ -44,8 +44,4 @@ public class UhrinovejHra {
     public static int randomNumber(int minNum, int maxNum) {
         return rand.nextInt(maxNum - minNum + 1) + minNum;
     }
-
-    public static ArrayList<Integer> stringToArrayList(String str) {
-        
-    }
 }
