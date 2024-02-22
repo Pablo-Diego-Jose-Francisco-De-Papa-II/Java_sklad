@@ -9,10 +9,12 @@ public class UhrinovejHra {
 
     public static void main(String[] args) {
         int randomNumber = randomNumber(100000, 999999);
+
         ArrayList<Integer> splitedRandomNumber = listIt(Integer.toString(randomNumber));
         System.out.println(randomNumber);
 
         while (true) {
+            StringBuilder hintNum = new StringBuilder();
             String number = input.next();
             ArrayList<Integer> splitedNumber = listIt(number);
 
@@ -23,14 +25,16 @@ public class UhrinovejHra {
             for (int i = 0; i < splitedRandomNumber.size(); i++) {
 
                 if (splitedNumber.get(i).equals(splitedRandomNumber.get(i))) {
-                    System.out.print(1);
+                    hintNum.append("1");
 
                 } else if (splitedRandomNumber.contains(splitedNumber.get(i))) {
-                    System.out.print(0);
+                    hintNum.append("0");
                 }
             }
+            StringBuilder reversed = new StringBuilder(hintNum).reverse();
+            String reversedHintNum = reversed.toString();
+            System.out.println(reversedHintNum);
 
-            System.out.println(" ");
             splitedNumber.clear();
         }
     }
