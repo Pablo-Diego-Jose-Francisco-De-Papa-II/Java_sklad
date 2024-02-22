@@ -26,6 +26,10 @@ public class UhrinovejHra {
                 splitedNumber.add(Integer.valueOf(item));
             }
 
+            if (String.valueOf(randomNumber).trim().equals(number.trim())) {
+                return;
+            }
+
             for (int i = 0; i < splitedRandomNumber.size(); i++) {
 
                 if (splitedNumber.get(i).equals(splitedRandomNumber.get(i))) {
