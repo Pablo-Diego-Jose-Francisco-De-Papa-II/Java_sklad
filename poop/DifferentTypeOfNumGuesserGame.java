@@ -8,22 +8,16 @@ public class UhrinovejHra {
     static Scanner input = new Scanner(System.in);
 
     public static void main(String[] args) {
-        ArrayList<Integer> splitedRandomNumber = new ArrayList<>();
-        ArrayList<Integer> splitedNumber = new ArrayList<>();
-
         int randomNumber = randomNumber(100000, 999999);
-
-        for (String item : String.valueOf(randomNumber).trim().split("")) {
-            splitedRandomNumber.add(Integer.valueOf(item));
-        }
-
+        ArrayList<Integer> splitedRandomNumber = listIt(Integer.toString(randomNumber));
         System.out.println(randomNumber);
 
         while (true) {
             String number = input.next();
+            ArrayList<Integer> splitedNumber = listIt(number);
 
-            for (String item : number.trim().split("")) {
-                splitedNumber.add(Integer.valueOf(item));
+            if (String.valueOf(randomNumber).equals(number.trim())) {
+                return;
             }
 
             for (int i = 0; i < splitedRandomNumber.size(); i++) {
@@ -43,5 +37,14 @@ public class UhrinovejHra {
 
     public static int randomNumber(int minNum, int maxNum) {
         return rand.nextInt(maxNum - minNum + 1) + minNum;
+    }
+
+    public static ArrayList<Integer> listIt(String str) {
+        ArrayList<Integer> list = new ArrayList<>(str.length());
+
+        for (char item : str.toCharArray()) {
+            list.add(Character.getNumericValue(item));
+        }
+        return list;
     }
 }
