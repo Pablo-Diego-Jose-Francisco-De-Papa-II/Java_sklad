@@ -9,28 +9,38 @@ public class UhrinovejHra {
 
     public static void main(String[] args) {
         int randomNumber = randomNumber(100000, 999999);
-        ArrayList<Integer> splitedRandomNumber = listIt(Integer.toString(randomNumber));
-        System.out.println(randomNumber);
+        int attempts = 0;
 
         while (true) {
+            ArrayList<Integer> splitedRandomNumber = listIt(Integer.toString(randomNumber));
+            StringBuilder hintNum = new StringBuilder();
+            System.out.println(randomNumber);
             String number = input.next();
             ArrayList<Integer> splitedNumber = listIt(number);
 
+            attempts += 1;
+
             if (String.valueOf(randomNumber).equals(number.trim())) {
+                System.out.println("WELL DONE! It took you" + attempts + "tries.");
                 return;
             }
 
             for (int i = 0; i < splitedRandomNumber.size(); i++) {
-
                 if (splitedNumber.get(i).equals(splitedRandomNumber.get(i))) {
-                    System.out.print(1);
+                    hintNum.append("1");
 
                 } else if (splitedRandomNumber.contains(splitedNumber.get(i))) {
-                    System.out.print(0);
-                }
-            }
+                    hintNum.append("0");
 
-            System.out.println(" ");
+                }
+                splitedNumber.remove(splitedNumber.get(i));
+                splitedRandomNumber.remove(splitedRandomNumber.get(i));
+
+            }
+            StringBuilder reversed = new StringBuilder(hintNum).reverse();
+            String reversedHintNum = reversed.toString();
+            System.out.println(reversedHintNum);
+
             splitedNumber.clear();
         }
     }
