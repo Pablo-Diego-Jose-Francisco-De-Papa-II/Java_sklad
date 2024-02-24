@@ -9,40 +9,43 @@ public class UhrinovejHra {
 
     public static void main(String[] args) {
         int randomNumber = randomNumber(100000, 999999);
+        int allNumbers[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 0};
         int attempts = 0;
 
         while (true) {
             ArrayList<Integer> splitedRandomNumber = listIt(Integer.toString(randomNumber));
-            System.out.println(randomNumber);
             String number = input.next();
             ArrayList<Integer> splitedNumber = listIt(number);
 
-            attempts += 1;
+            if (splitedNumber.size() == 6) {
+                attempts += 1;
 
-            if (String.valueOf(randomNumber).equals(number.trim())) {
-                System.out.println("WELL DONE! It took you " + attempts + " tries.");
-                return;
-            }
-
-
-            for (int i = 0; i < splitedNumber.size(); i++) {
-                if (splitedNumber.get(i).equals(splitedRandomNumber.get(i))) {
-                    System.out.print("1");
-                    splitedNumber.set(i, -1);
-                    splitedRandomNumber.set(i, -2);
+                if (String.valueOf(randomNumber).equals(number.trim())) {
+                    System.out.println("WELL DONE! It took you " + attempts + " tries.");
+                    return;
                 }
-            }
 
-            for (int i = 0; i < splitedNumber.size(); i++) {
-                if (splitedRandomNumber.contains(splitedNumber.get(i))) {
-                    System.out.print("0");
-                    int index = splitedRandomNumber.indexOf(splitedNumber.get(i));
-                    splitedNumber.set(i, -1);
-                    splitedRandomNumber.set(index, -2);
+                for (int i = 0; i < splitedNumber.size(); i++) {
+                    if (splitedNumber.get(i).equals(splitedRandomNumber.get(i))) {
+                        System.out.print("1");
+                        splitedNumber.set(i, -1);
+                        splitedRandomNumber.set(i, -2);
+                    }
                 }
+
+                for (int i = 0; i < splitedNumber.size(); i++) {
+                    if (splitedRandomNumber.contains(splitedNumber.get(i))) {
+                        System.out.print("0");
+                        int index = splitedRandomNumber.indexOf(splitedNumber.get(i));
+                        splitedNumber.set(i, -1);
+                        splitedRandomNumber.set(index, -2);
+                    }
+                }
+                System.out.println("\n");
+                splitedNumber.clear();
+            } else {
+                System.out.println("Enter 6 digit number next time!");
             }
-            System.out.println("\n");
-            splitedNumber.clear();
         }
     }
 
