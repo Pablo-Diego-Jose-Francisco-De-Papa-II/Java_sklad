@@ -13,7 +13,6 @@ public class UhrinovejHra {
 
         while (true) {
             ArrayList<Integer> splitedRandomNumber = listIt(Integer.toString(randomNumber));
-            StringBuilder hintNum = new StringBuilder();
             System.out.println(randomNumber);
             String number = input.next();
             ArrayList<Integer> splitedNumber = listIt(number);
@@ -28,34 +27,27 @@ public class UhrinovejHra {
 
             for (int i = 0; i < splitedNumber.size(); i++) {
                 if (splitedNumber.get(i).equals(splitedRandomNumber.get(i))) {
-                    //hintNum.append("1");
                     System.out.print("1");
-                    splitedNumber.remove(i);
-                    splitedRandomNumber.remove(i);
+                    splitedNumber.set(i, -1);
+                    splitedRandomNumber.set(i, -2);
                 }
-                System.out.println(i);
             }
 
             for (int i = 0; i < splitedNumber.size(); i++) {
-                if (splitedNumber.contains(splitedRandomNumber.get(i))) {
-                    //hintNum.append("0");
+                if (splitedRandomNumber.contains(splitedNumber.get(i))) {
                     System.out.print("0");
-                    splitedNumber.remove(Integer.valueOf(splitedRandomNumber.get(i)));
-                    splitedRandomNumber.remove(i);
+                    int index = splitedRandomNumber.indexOf(splitedNumber.get(i));
+                    splitedNumber.set(i, -1);
+                    splitedRandomNumber.set(index, -2);
                 }
-                System.out.println(i);
             }
-
-            StringBuilder reversed = new StringBuilder(hintNum).reverse();
-            String reversedHintNum = reversed.toString();
             System.out.println("\n");
-
             splitedNumber.clear();
         }
     }
 
     public static int randomNumber(int minNum, int maxNum) {
-        return 123456;
+        return rand.nextInt(maxNum - minNum + 1) + minNum;
     }
 
     public static ArrayList<Integer> listIt(String str) {
@@ -67,6 +59,3 @@ public class UhrinovejHra {
         return list;
     }
 }
-
-// 7718
-// 6254
