@@ -1,16 +1,27 @@
 import java.util.Random;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Arrays;
 
 
 public class UhrinovejHra {
     static Random rand = new Random();
     static Scanner input = new Scanner(System.in);
+    static StringBuilder str = new StringBuilder();
 
     public static void main(String[] args) {
-        int randomNumber = randomNumber(100000, 999999);
-        int allNumbers[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 0};
+        int[] allNumbers = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
         int attempts = 0;
+
+        System.out.println("Chose your mode (random \"r\" or pandigital \"p\"):");
+        String modeChooser= input.next();
+
+        switch (modeChooser) {
+            case "random", "r" -> int randomNumber = randomRandomNumber(100000, 999999);
+            case "pandigital", "p" -> int randomNumber = randomPandigitalNumber(allNumbers);
+            default -> System.out.println("idk");
+        }
 
         while (true) {
             ArrayList<Integer> splitedRandomNumber = listIt(Integer.toString(randomNumber));
@@ -49,8 +60,17 @@ public class UhrinovejHra {
         }
     }
 
-    public static int randomNumber(int minNum, int maxNum) {
+    public static int randomRandomNumber(int minNum, int maxNum) {
         return rand.nextInt(maxNum - minNum + 1) + minNum;
+    }
+
+    public static int randomPandigitalNumber(Integer[] allNumbers) {
+        Collections.shuffle(Arrays.asList(allNumbers));
+
+        for (int i = 0; i < 6; i++) {
+            str.append(allNumbers[i]);
+        }
+        return Integer.parseInt(str.toString());
     }
 
     public static ArrayList<Integer> listIt(String str) {
