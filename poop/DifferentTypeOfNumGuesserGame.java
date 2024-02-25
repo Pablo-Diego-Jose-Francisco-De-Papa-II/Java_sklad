@@ -18,8 +18,8 @@ public class UhrinovejHra {
         String modeChooser= input.next();
 
         switch (modeChooser) {
-            case "random", "r" -> int randomNumber = randomRandomNumber(100000, 999999);
-            case "pandigital", "p" -> int randomNumber = randomPandigitalNumber(allNumbers);
+            case "random", "r" -> { int randomNumber = randomRandomNumber(100000, 999999); }
+            case "pandigital", "p" -> { int randomNumber = randomPandigitalNumber(allNumbers); }
             default -> System.out.println("idk");
         }
 
