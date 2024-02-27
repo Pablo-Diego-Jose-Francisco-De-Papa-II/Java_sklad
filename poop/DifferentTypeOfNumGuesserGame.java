@@ -19,11 +19,9 @@ public class UhrinovejHra {
         System.out.println("Chose your mode (random \"r\" or pandigital \"p\"):");
 
         while (shouldRun) {
-            String modeChooser= input.next();
-
-            switch (modeChooser) {
+            switch (input.next()) {
                 case "random", "r" -> { randomNumber = randomRandomNumber(100000, 999999); shouldRun = false; }
-                case "pandigital", "p" -> { randomNumber = randomPandigitalNumber(allNumbers); shouldRun = false; System.out.println(randomNumber); }
+                case "pandigital", "p" -> { randomNumber = randomPandigitalNumber(allNumbers); shouldRun = false; }
                 default -> System.out.println("This mode doesnt exist...");
             }
         }
@@ -34,7 +32,7 @@ public class UhrinovejHra {
             ArrayList<Integer> splitedNumber = listIt(number);
 
             if (splitedNumber.size() == 6) {
-                attempts += 1;
+                attempts++;
 
                 if (String.valueOf(randomNumber).equals(number.trim())) {
                     System.out.println("WELL DONE! It took you " + attempts + " tries.");
@@ -58,7 +56,6 @@ public class UhrinovejHra {
                     }
                 }
                 System.out.println("\n");
-                splitedNumber.clear();
             } else {
                 System.out.println("Enter 6 digit number next time!");
             }
