@@ -1,12 +1,6 @@
 import java.util.Scanner;
 
-/*  Stvrta uloha:
-
-    Uloha:
-    Vasou ulohou bude vytvorit Classu Clovek s constructorom a pri inicializacii bude treba nacitat
-    (string) meno a (int) vek, ktory nasledne aj ulozite. Vytvorite aj Classu RegisterLudi kde
-    inicializujete par ludi a vypisete do konzole ich meno a vek...
-*/
+//Vytvorite aj Classu RegisterLudi kde inicializujete par ludi a vypisete do konzole ich meno a vek...
 
 public class PreklinamTaVayo {
 
@@ -14,8 +8,14 @@ public class PreklinamTaVayo {
         Scanner input = new Scanner(System.in);
 
         while (true) {
-            Clovek data = new Clovek(input.nextLine(),input.nextInt());
-            System.out.println(data.name + " " + data.age);
+            System.out.println("Enter your name: ");
+            String name = input.nextLine();
+
+            System.out.println("Enter your age: ");
+            int age = Integer.parseInt(input.nextLine());
+
+            Clovek clovek = new Clovek(name, age);
+            System.out.println(clovek.name + " " + clovek.age);
         }
     }
 }
