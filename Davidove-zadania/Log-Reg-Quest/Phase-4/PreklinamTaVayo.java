@@ -15,7 +15,12 @@ public class PreklinamTaVayo {
             int age = Integer.parseInt(input.nextLine());
 
             Clovek clovek = new Clovek(name, age);
-            System.out.println(clovek.name + " " + clovek.age);
+
+            System.out.println("Wanna see all registered users (yes/no) or end?: ");
+            switch (input.nextLine().toLowerCase()) {
+                case "yes", "y" -> System.out.println(clovek.name + " " + clovek.age);
+                case "end", "e" -> { return; }
+            }
         }
     }
 }
