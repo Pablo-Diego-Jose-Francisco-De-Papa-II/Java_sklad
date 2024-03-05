@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 
+
 public class RegisterLudi {
     static ArrayList<Clovek> peopleDetails = new ArrayList<>();
 
