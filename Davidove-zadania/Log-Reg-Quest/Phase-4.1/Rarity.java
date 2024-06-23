@@ -4,24 +4,25 @@ package DavitZadania.Zadanie4_1;
 import java.util.Random;
 
 public enum Rarity {
-    COMMON(1, new String[]{"Pallerovej čajík", "Ing. titul"}),
-    UNCOMMON(1.3, new String[]{"Brianrot", "RTX 4090"}),
-    RARE(1.9, new String[]{"Femboy", "Filament"}),
-    EPIC(2.5, new String[]{"Hyperion", "Davitov freetime"}),
-    LEGENDARY(3.3, new String[]{"Cum sock", "Nezvladam to"}),
-    MYTHIC(generateMultiplication(), new String[]{"Priepustka z chemickej", "Sranie allowance", "Mayove vayo"});
+    COMMON(1),
+    UNCOMMON(1.3),
+    RARE(1.9),
+    EPIC(2.5),
+    LEGENDARY(3.3),
+    MYTHIC(new Random().nextInt(500, 1001));
 
 
-    double multiplication;
-    String[] itemName;
-    Rarity(double value, String[] array) {
+    final double multiplication;
+    Rarity(double value) {
         this.multiplication = value;
-        this.itemName = array;
     }
 
 
-    static int generateMultiplication() {
-        Random random = new Random();
-        return random.nextInt(500, 1001);
+    static String item;
+    static final String[] allItems = {"Pallerovej moč", "Ing. titul", "Brianrot", "RTX 4090", "Femboy", "Filament",
+            "Hyperion", "Davitov freetime", "Priepustka z chemickej", "Sranie allowance", "Mayove vayo"};
+
+    static void itemPicker() {
+        item = allItems[new Random().nextInt(allItems.length)];
     }
 }
