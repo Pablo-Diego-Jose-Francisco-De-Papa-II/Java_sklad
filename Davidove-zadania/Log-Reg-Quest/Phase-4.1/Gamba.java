@@ -3,6 +3,9 @@ package DavitZadania.Zadanie4_1;
 import java.util.Scanner;
 import java.util.Random;
 
+import static DavitZadania.Zadanie4_1.Rarity.item;
+import static DavitZadania.Zadanie4_1.Rarity.itemPicker;
+
 
 public class Gamba {
     static Random random = new Random();
@@ -27,7 +30,8 @@ public class Gamba {
         randomNum = random.nextInt(100) + 1;
 
         rarityPricePicker();
-        System.out.println("Unlocked " + rarity + " rarity item and It's worth " + price + " coins!");
+        itemPicker();
+        System.out.println("Unlocked " + rarity + " rarity item (" + item + ") and It's worth " + price + " coins!");
     }
 
 
