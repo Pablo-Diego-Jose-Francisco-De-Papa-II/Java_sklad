@@ -38,23 +38,23 @@ public class Gamba {
         }
         else if (randomNum < 60) {
             rarity = Rarity.UNCOMMON;
-            price = (int)Math.round(randomNum * 1.3);
+            price = (int)Math.round(randomNum * Rarity.UNCOMMON.multiplication);
         }
         else if (randomNum < 85) {
             rarity = Rarity.RARE;
-            price = (int)Math.round(randomNum * 1.9);
+            price = (int)Math.round(randomNum * Rarity.RARE.multiplication);
         }
         else if (randomNum < 95) {
             rarity = Rarity.EPIC;
-            price = (int)Math.round(randomNum * 2.5);
+            price = (int)Math.round(randomNum * Rarity.EPIC.multiplication);
         }
         else if (randomNum < 100) {
             rarity = Rarity.LEGENDARY;
-            price = (int)Math.round(randomNum * 3.3);
+            price = (int)Math.round(randomNum * Rarity.LEGENDARY.multiplication);
         }
         else if (randomNum == 100) {
             rarity = Rarity.MYTHIC;
-            price = random.nextInt(500, 1001);
+            price = (int)Rarity.MYTHIC.multiplication;
         }
     }
 }
