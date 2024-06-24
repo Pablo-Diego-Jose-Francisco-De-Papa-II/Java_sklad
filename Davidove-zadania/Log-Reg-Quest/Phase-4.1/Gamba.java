@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 import static DavitZadania.Zadanie4_1.Rarity.*;
 
-
 public class Gamba {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
