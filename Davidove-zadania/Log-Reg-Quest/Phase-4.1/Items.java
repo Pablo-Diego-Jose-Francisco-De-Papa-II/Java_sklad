@@ -8,11 +8,14 @@ import static DavitZadania.Zadanie4_1.Rarity.*;
 public class Items {
     String item;
     Rarity rarity;
+    int price;
 
 
-    public Items(String pickedItem, Rarity pickedRarity) {
+
+    public Items(String pickedItem, Rarity pickedRarity, int pickedPrice) {
         this.item = pickedItem;
         this.rarity = pickedRarity;
+        this.price = pickedPrice;
     }
 
 
@@ -31,5 +34,16 @@ public class Items {
             }
         }
         return COMMON;
+    }
+
+    static int getRandomPrice() {
+        final int randomNum = rand.nextInt(100) + 1;
+
+        for (Rarity r : values()) {
+            if (randomNum <= r.chance) {
+                return (int)(randomNum * r.value);
+            }
+        }
+        return 1;
     }
 }
