@@ -20,7 +20,7 @@ public class Gamba {
 
 
     static void gamble() {
-        Items Item = new Items(getRandomItem(), getRandomRarity());
-        System.out.println("Unlocked " + Item.rarity + " rarity item (" + Item.item + ") and It's worth "  + " coins!");
+        Items Item = new Items(getRandomItem(), getRandomRarity(), getRandomPrice());
+        System.out.println("Unlocked " + Item.rarity + " rarity item (" + Item.item + ") and It's worth " + Item.price + " coins!");
     }
 }
