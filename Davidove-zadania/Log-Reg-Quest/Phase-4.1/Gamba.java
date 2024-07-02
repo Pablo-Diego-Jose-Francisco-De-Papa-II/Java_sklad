@@ -14,15 +14,30 @@ public class Gamba {
             switch (input.nextLine()) {
                 case "inv" -> {
                     switch (input.nextLine()) {
-                        case "item", "i" -> System.out.println("idkItem");
-                        case "rarity", "r" -> System.out.println("idk1");
-                        case "price", "p" -> {
-                            itemList.sort(new Sort());
+                        case "item", "i" -> {
+                            itemList.sort(Item.comparator4);
                             for (Item idk : itemList) {
                                 System.out.println(idk);
                             }
                         }
-                        case "time", "t" -> System.out.println("idk3");
+                        case "rarity", "r" -> {
+                            itemList.sort(Item.comparator2);
+                            for (Item idk : itemList) {
+                                System.out.println(idk);
+                            }
+                        }
+                        case "price", "p" -> {
+                            itemList.sort(Item.comparator1);
+                            for (Item idk : itemList) {
+                                System.out.println(idk);
+                            }
+                        }
+                        case "time", "t" -> {
+                            itemList.sort(Item.comparator3);
+                            for (Item idk : itemList) {
+                                System.out.println(idk);
+                            }
+                        }
                     }
                 }
                 case "end" -> { return; }
