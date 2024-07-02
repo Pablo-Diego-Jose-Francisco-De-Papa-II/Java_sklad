@@ -9,7 +9,7 @@ public enum Rarity {
     RARE(1.9, 84),
     EPIC(2.5, 94),
     LEGENDARY(3.3, 99),
-    MYTHIC(new Random().nextInt(500, 1001), 100);
+    MYTHIC((double) new Random().nextInt(500, 1001) / 100, 100);
 
 
     final int chance;
@@ -21,5 +21,6 @@ public enum Rarity {
 
     static final String[] ALL_ITEMS
             = {"Pallerovej moč", "Ing. titul", "Brianrot", "RTX 4090", "Femboy", "Filament",
-            "Hyperion", "Davitov freetime", "Priepustka z chemickej", "Sranie allowance", "Mayove vayo"};
+            "Hyperion", "Davitov free time", "Priepustka z chemickej", "Sranie allowance", "Mayove vayo",
+            "Black ice", "Meowmere", "Programming skills", "Maid outfit", "Halušky", "Woman"};
 }
