@@ -3,6 +3,7 @@ package DavitZadania.Zadanie4_1;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
+import java.util.Comparator;
 
 import static DavitZadania.Zadanie4_1.Rarity.*;
 
@@ -61,4 +62,12 @@ public class Item {
     public String getTime() {
         return LocalTime.now().format(myFormatObj);
     }
+
+
+    static Comparator<Item> comparator1 = Comparator.comparingInt(Item::getRandomPrice);
+    static Comparator<Item> comparator2 = Comparator.comparingInt(i -> i.getRandomRarity().ordinal());
+    static Comparator<Item> comparator3 = Comparator.comparing(Item::getTime);
+    static Comparator<Item> comparator4 = (i1, i2) -> {
+        return i1.getRandomItem().compareToIgnoreCase(i2.getRandomItem());
+    };
 }
