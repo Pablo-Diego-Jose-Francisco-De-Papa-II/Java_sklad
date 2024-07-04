@@ -17,19 +17,19 @@ public class Gamba {
                 case "inv" -> {
                     switch (input.nextLine()) {
                         case "item", "i" -> {
-                            itemList.sort(Item.comparator4);
+                            itemList.sort(Item.itemComparator);
                             choice();
                         }
                         case "rarity", "r" -> {
-                            itemList.sort(Item.comparator2);
+                            itemList.sort(Item.rarityComparator);
                             choice();
                         }
                         case "price", "p" -> {
-                            itemList.sort(Item.comparator1);
+                            itemList.sort(Item.priceComparator);
                             choice();
                         }
                         case "time", "t" -> {
-                            itemList.sort(Item.comparator3);
+                            itemList.sort(Item.timeComparator);
                             choice();
                         }
                     }
@@ -50,25 +50,16 @@ public class Gamba {
 
 
     public static void choice() {
-        if (printInReverse) {
-            helpReversed();
+        if (!printInReverse) {
+            for (Item idk : itemList) {
+                System.out.println(idk);
+            }
+            printInReverse = true;
         } else {
-            helpNormal();
+            for (Item idk : itemList.reversed()) {
+                System.out.println(idk);
+            }
+            printInReverse = false;
         }
-    }
-
-    public static void helpNormal() {
-        for (Item idk : itemList) {
-            System.out.println(idk);
-        }
-        printInReverse = true;
-    }
-
-    public static void helpReversed() {
-        System.out.println("reversed");
-        for (Item idk : itemList.reversed()) {
-            System.out.println(idk);
-        }
-        printInReverse = false;
     }
 }
