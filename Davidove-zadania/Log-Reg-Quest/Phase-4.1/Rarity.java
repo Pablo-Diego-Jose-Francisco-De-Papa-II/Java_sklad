@@ -1,6 +1,5 @@
 package DavitZadania.Zadanie4_1;
 
-
 import java.util.Random;
 
 public enum Rarity {
@@ -22,5 +21,5 @@ public enum Rarity {
     static final String[] ALL_ITEMS
             = {"Pallerovej moč", "Ing. titul", "Brianrot", "RTX 4090", "Femboy", "Filament",
             "Hyperion", "Davitov free time", "Priepustka z chemickej", "Sranie allowance", "Mayove vayo",
-            "Black ice", "Meowmere", "Programming skills", "Maid outfit", "Halušky", "Woman"};
+            "Black ice", "Meowmere", "Programming skills", "Maid outfit", "Halušky", "Woman", "3D tlačiareň"};
 }
