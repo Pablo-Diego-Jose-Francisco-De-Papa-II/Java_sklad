@@ -21,21 +21,16 @@ public class Item {
 
 
     public Item() {
-        this.item = getRandomItem();
+        this.item = Rarity.ALL_ITEMS[rand.nextInt(Rarity.ALL_ITEMS.length)];
         this.rarity = getRandomRarity();
-        this.price = getRandomPrice();
-        this.time = getTime();
+        this.price = (int) (rarity.value * randomNum);
+        this.time = LocalTime.now().format(myFormatObj);
     }
 
 
     @Override
     public String toString() {
         return rarity + " " + item + " " + price + " coins " + time;
-    }
-
-
-    public String getRandomItem() {
-        return Rarity.ALL_ITEMS[rand.nextInt(Rarity.ALL_ITEMS.length)];
     }
 
 
@@ -49,25 +44,8 @@ public class Item {
     }
 
 
-    int getRandomPrice() {
-        for (Rarity r : values()) {
-            if (randomNum <= r.chance) {
-                return (int)(randomNum * r.value);
-            }
-        }
-        return 1;
-    }
-
-
-    public String getTime() {
-        return LocalTime.now().format(myFormatObj);
-    }
-
-
-    static Comparator<Item> comparator1 = Comparator.comparingInt(Item::getRandomPrice);
-    static Comparator<Item> comparator2 = Comparator.comparingInt(i -> i.getRandomRarity().ordinal());
-    static Comparator<Item> comparator3 = Comparator.comparing(Item::getTime);
-    static Comparator<Item> comparator4 = (i1, i2) -> {
-        return i1.getRandomItem().compareToIgnoreCase(i2.getRandomItem());
-    };
+    static Comparator<Item> itemComparator = (i1, i2) -> i1.item.compareToIgnoreCase(i2.item);
+    static Comparator<Item> rarityComparator = Comparator.comparingInt(i -> Integer.parseInt(i.item));
+    static Comparator<Item> priceComparator = Comparator.comparingInt(i -> i.price);
+    static Comparator<Item> timeComparator = Comparator.comparing(i -> i.time);
 }
