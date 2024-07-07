@@ -28,7 +28,7 @@ public class Gamba {
     }
 
 
-    static void gamble() {A
+    static void gamble() {
         Item item = new Item();
 
         itemList.add(item);
