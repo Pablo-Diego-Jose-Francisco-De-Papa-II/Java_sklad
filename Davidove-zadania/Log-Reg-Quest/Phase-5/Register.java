@@ -1,10 +1,3 @@
-/*Uloha:
-Prepis prvotny program (teda program pre registraciu uzivatelov) s tym, ze kazdy clovek bude samotny objekt classy Clovek.
-Kazdia instancia cloveka bude mat v sebe ulozene: meno osoby, heslo, datum narodenia (staci rok ig), mail.
-(mozete vytvarat pri inicializacii, idc) Registrovanych uzivatelov ukladajte do register/login classy a najlepsie do
-HashMapy s K: email, V: instancia osoby.
-*/
-
 package DavitZadania.Zadanie5;
 
 import java.util.Scanner;
@@ -19,63 +12,60 @@ public class Register {
 
         String regexPattern = "\\w+([.-]?\\w+)*@\\w+([.-]?\\w+)*(\\.\\w{2,3})+";
         Pattern pattern = Pattern.compile(regexPattern);
-        HashMap<String, Clovek> user_data = new HashMap<>();
+        HashMap<String, Clovek> savedUsers = new HashMap<>();
 
         while(true) {
             System.out.print("login or register? ");
 
             switch (input.next().toLowerCase()) {
-                case "login", "l":
-                    System.out.print("Enter your email: ");                                                 //input name
-                    String log_mail = input.next();
+                case "login", "l" -> {
+                    System.out.print("Enter your email: ");
+                    String logMail = input.next();
 
+                    if (savedUsers.containsKey(logMail)) {
+                        System.out.print("Enter your password: ");
+                        String logPass = input.next();
 
-                    if (user_data.containsKey(log_mail)) {                                                  //user found
-                        System.out.print("Enter your password: ");                                          //input pass
-                        String log_pass = input.next();
+                        String pass = String.valueOf(savedUsers.get(logMail).password);
 
-                        String pass = String.valueOf(user_data.get(log_mail));
-
-                        if (pass.equals(log_pass)) {
+                        if (pass.equals(logPass)) {
                             System.out.println("You successfully logged in!");
+                            System.out.println(savedUsers.get(logMail));
                             return;
 
                         } else {
                             System.out.println("INCORRECT PASSWORD");
                         }
 
-                    } else {                                                                            //user not found
-                        System.out.println("USER WITH THIS EMAIL WAS NOT FOUND");                                //error
+                    } else {
+                        System.out.println("USER WITH THIS EMAIL WAS NOT FOUND");
                     }
-                    break;
+                }
 
-
-                case "register", "r":
+                case "register", "r" -> {
                     System.out.print("Enter a new email address: ");
-                    String reg_mail = input.next();
-                    Matcher matcher = pattern.matcher(reg_mail);
+                    String regMail = input.next();
+                    Matcher matcher = pattern.matcher(regMail);
 
                     if (!matcher.matches()) {
                         System.out.println("INVALID EMAIL ADDRESS");
                         break;
                     }
 
-                    if (user_data.containsKey(reg_mail)) {
+                    if (savedUsers.containsKey(regMail)) {
                         System.out.println("EMAIL ALREADY IN USE");
                         break;
                     }
 
                     System.out.print("Enter a password, name and birth date: ");
                     String userInput = input.next();
-                    String[] userData = userInput.split(",");
+                    String[] userData = userInput.split("[, ]+");
 
                     if (userData.length != 3) {
                         System.out.println("ENTER ALL DATA NEXT TIME");
                         break;
                     }
 
-                    String reg_password = userData[0].trim();
-                    String reg_name = userData[1].trim();
                     int reg_birthDate;
 
                     try {
@@ -85,16 +75,11 @@ public class Register {
                         break;
                     }
 
+                    Clovek clovek = new Clovek(userData[0].trim(), userData[1].trim(), reg_birthDate);
+                    savedUsers.put(regMail, clovek);
+                }
 
-                    Clovek clovek = new Clovek(reg_password, reg_name, reg_birthDate);
-                    System.out.println(clovek);
-
-                    user_data.put(reg_mail, clovek);
-                    break;
-
-
-                default:
-                    System.out.println("UNKNOWN COMMAND");
+                default -> System.out.println("UNKNOWN COMMAND");
             }
         }
     }
