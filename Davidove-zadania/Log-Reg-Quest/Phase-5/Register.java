@@ -1,3 +1,10 @@
+/*Uloha:
+Prepis prvotny program (teda program pre registraciu uzivatelov) s tym, ze kazdy clovek bude samotny objekt classy Clovek.
+Kazdia instancia cloveka bude mat v sebe ulozene: meno osoby, heslo, datum narodenia (staci rok ig), mail.
+(mozete vytvarat pri inicializacii, idc) Registrovanych uzivatelov ukladajte do register/login classy a najlepsie do
+HashMapy s K: email, V: instancia osoby.
+*/
+
 package DavitZadania.Zadanie5;
 
 import java.util.Scanner;
@@ -26,7 +33,7 @@ public class Register {
                         System.out.print("Enter your password: ");
                         String logPass = input.next();
 
-                        String pass = String.valueOf(savedUsers.get(logMail).password);
+                        String pass = savedUsers.get(logMail).password;
 
                         if (pass.equals(logPass)) {
                             System.out.println("You successfully logged in!");
@@ -79,7 +86,9 @@ public class Register {
                     savedUsers.put(regMail, clovek);
                 }
 
-                default -> System.out.println("UNKNOWN COMMAND");
+                default -> {
+                    System.out.println("UNKNOWN COMMAND");
+                }
             }
         }
     }
