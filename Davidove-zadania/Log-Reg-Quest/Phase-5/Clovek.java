@@ -13,6 +13,6 @@ public class Clovek {
 
     @Override
     public String toString() {
-        return "password = " + password + ", name = " + name + ", birthDate = " + birthDate;
+        return "Your name is " + name + " and you were born in " + birthDate + "!";
     }
 }
