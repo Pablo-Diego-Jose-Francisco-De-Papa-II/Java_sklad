@@ -1,15 +1,7 @@
-/*Uloha:
-Prepis prvotny program (teda program pre registraciu uzivatelov) s tym, ze kazdy clovek bude samotny objekt classy Clovek.
-Kazdia instancia cloveka bude mat v sebe ulozene: meno osoby, heslo, datum narodenia (staci rok ig), mail.
-(mozete vytvarat pri inicializacii, idc) Registrovanych uzivatelov ukladajte do register/login classy a najlepsie do
-HashMapy s K: email, V: instancia osoby.
-*/
-
 package DavitZadania.Zadanie5;
 
 import java.util.Scanner;
 import java.util.HashMap;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Register {
@@ -17,8 +9,7 @@ public class Register {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
 
-        String regexPattern = "\\w+([.-]?\\w+)*@\\w+([.-]?\\w+)*(\\.\\w{2,3})+";
-        Pattern pattern = Pattern.compile(regexPattern);
+        Pattern EMAIL_PATTERN = Pattern.compile("\\w+([.-]?\\w+)*@\\w+([.-]?\\w+)*(\\.\\w{2,3})+");
         HashMap<String, Clovek> savedUsers = new HashMap<>();
 
         while(true) {
@@ -52,9 +43,8 @@ public class Register {
                 case "register", "r" -> {
                     System.out.print("Enter a new email address: ");
                     String regMail = input.next();
-                    Matcher matcher = pattern.matcher(regMail);
 
-                    if (!matcher.matches()) {
+                    if (EMAIL_PATTERN.matcher(regMail).matches()) {
                         System.out.println("INVALID EMAIL ADDRESS");
                         break;
                     }
