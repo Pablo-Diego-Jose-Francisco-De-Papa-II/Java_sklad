@@ -73,7 +73,7 @@ public class FileManager {
         this.file = file;
     }
 
-    public String write(String text) {
+    public boolean write(String text) {
         try {
             FileWriter txtWriter = new FileWriter(file);
 
@@ -81,11 +81,11 @@ public class FileManager {
 
             txtWriter.write(input.nextLine());
             txtWriter.close();
-            return "file";
+            return true;
 
         } catch (IOException e) {
             System.out.println(e);
-            return null;
+            return false;
         }
     }
 
