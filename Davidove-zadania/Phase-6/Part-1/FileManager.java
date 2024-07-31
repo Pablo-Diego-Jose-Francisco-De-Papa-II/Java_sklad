@@ -1,16 +1,13 @@
 package DavitZadania.Zadanie6;
 
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.Scanner;
 
 public class FileManager {
     private static File file;
 
-    
+
     public static void main(String[] args) throws IOException {
         Scanner input = new Scanner(System.in);
 
@@ -27,16 +24,18 @@ public class FileManager {
                     FileManager.createAndGetFile(input.nextLine());
                 }
                 case "write", "w" -> {
-                    FileManager.write(input.nextLine());
+                    FileManager what = new FileManager(file);
+                    System.out.println("What would you like to write: ");
+                    what.write(input.nextLine());
                 }
                 case "writeAll", "wa" -> {//todo
-                    return;
+                    continue;
                 }
                 case "read", "r" -> {//todo
-                    return;
+                    continue;
                 }
                 case "readAll", "ra" -> {//todo
-                    return;
+                    continue;
                 }
                 case "end", "e" -> {
                     return;
@@ -64,7 +63,7 @@ public class FileManager {
 
             return new FileManager(file);
 
-        } catch (Exception e) {
+        } catch (IOException e) {
             System.out.println(e);
             return null;
         }
@@ -74,7 +73,7 @@ public class FileManager {
         this.file = file;
     }
 
-    public static void write(String text) {
+    public String write(String text) {
         try {
             FileWriter txtWriter = new FileWriter(file);
 
@@ -82,9 +81,11 @@ public class FileManager {
 
             txtWriter.write(input.nextLine());
             txtWriter.close();
+            return "file";
 
-        } catch (Exception e) {
+        } catch (IOException e) {
             System.out.println(e);
+            return null;
         }
     }
 
@@ -100,4 +101,3 @@ public class FileManager {
 
     }
 }
-
