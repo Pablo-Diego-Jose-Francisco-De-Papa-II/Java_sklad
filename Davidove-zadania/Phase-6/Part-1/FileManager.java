@@ -2,6 +2,8 @@ package DavitZadania.Zadanie6;
 
 
 import java.io.*;
+import java.nio.file.Files;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class FileManager {
@@ -31,11 +33,14 @@ public class FileManager {
                 case "writeAll", "wa" -> {//todo
                     continue;
                 }
-                case "read", "r" -> {//todo
-                    continue;
+                case "read", "r" -> {
+                    FileManager what = new FileManager(file);
+                    System.out.println("What line you want to read: ");
+                    System.out.println(what.read(input.nextInt()));
                 }
-                case "readAll", "ra" -> {//todo
-                    continue;
+                case "readAll", "ra" -> {
+                    FileManager what = new FileManager(file);
+                    what.readAll();
                 }
                 case "end", "e" -> {
                     return;
@@ -93,11 +98,44 @@ public class FileManager {
         return "";
     }
 
-    public void readAll() {
+    public String readAll() {
+        String targetLine = null;
 
+        try {
+            FileReader txtReader = new FileReader(file);
+            Scanner file = new Scanner(txtReader);
+
+            try {
+                while (true) {
+                    targetLine += file.nextLine() + "\n";
+                    System.out.println(targetLine);
+                }
+            } catch (NoSuchElementException e ) {
+                return targetLine;
+            }
+
+
+        } catch (FileNotFoundException e) {
+            System.out.println(e);
+            return null;
+        }
     }
 
-    public void read(int i) {
+    public String read(int y) {
+        String targetLine = null;
 
+        try {
+            FileReader txtReader = new FileReader(file);
+            Scanner file = new Scanner(txtReader);
+
+            for (int x = 1; x <= y; x++) {
+                targetLine = file.nextLine();
+            }
+            return targetLine;
+
+        } catch (FileNotFoundException e) {
+            System.out.println(e);
+            return null;
+        }
     }
 }
