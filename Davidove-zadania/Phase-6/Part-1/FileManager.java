@@ -101,8 +101,20 @@ public class FileManager {
         }
     }
 
-    public String writeAll(String[] text) {
-        return "";
+    public boolean writeAll(String[] text) {
+        try {
+            FileWriter txtWriter = new FileWriter(file);
+
+            Scanner input = new Scanner(Arrays.toString(text));
+
+            txtWriter.write(input.nextLine());
+            txtWriter.close();
+            return true;
+
+        } catch (IOException e) {
+            System.out.println(e);
+            return false;
+        }
     }
 
     public String[] readAll() {
