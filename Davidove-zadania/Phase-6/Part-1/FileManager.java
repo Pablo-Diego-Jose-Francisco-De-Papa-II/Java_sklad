@@ -2,7 +2,9 @@ package DavitZadania.Zadanie6;
 
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -10,7 +12,7 @@ public class FileManager {
     private static File file;
 
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
 
         while (true) {
@@ -30,8 +32,10 @@ public class FileManager {
                     System.out.println("What would you like to write: ");
                     what.write(input.nextLine());
                 }
-                case "writeAll", "wa" -> {//todo
-                    continue;
+                case "writeAll", "wa" -> {
+                    FileManager what = new FileManager(file);
+                    System.out.println("What would you like to write: ");
+                    what.writeAll(new String[]{});
                 }
                 case "read", "r" -> {
                     FileManager what = new FileManager(file);
@@ -40,7 +44,10 @@ public class FileManager {
                 }
                 case "readAll", "ra" -> {
                     FileManager what = new FileManager(file);
-                    what.readAll();
+
+                    for (String ble : what.readAll()) {
+                        System.out.println(ble);
+                    }
                 }
                 case "end", "e" -> {
                     return;
@@ -49,9 +56,13 @@ public class FileManager {
         }
     }
 
+    public FileManager(File file) {
+        this.file = file;
+    }
+
     public static FileManager openAndGetFile(String fileName) {
         try {
-            return new FileManager(new File(fileName).getAbsoluteFile());
+            return new FileManager(new File(fileName));
 
         } catch (Exception e) {
             System.out.println(e);
@@ -74,10 +85,6 @@ public class FileManager {
         }
     }
 
-    public FileManager(File file) {
-        this.file = file;
-    }
-
     public boolean write(String text) {
         try {
             FileWriter txtWriter = new FileWriter(file);
@@ -98,22 +105,19 @@ public class FileManager {
         return "";
     }
 
-    public String readAll() {
-        String targetLine = null;
+    public String[] readAll() {
+        String targetLine = "";
+        ArrayList<String> cat = new ArrayList<String>();
 
         try {
             FileReader txtReader = new FileReader(file);
             Scanner file = new Scanner(txtReader);
 
-            try {
-                while (true) {
-                    targetLine += file.nextLine() + "\n";
-                    System.out.println(targetLine);
-                }
-            } catch (NoSuchElementException e ) {
-                return targetLine;
+            while (file.hasNextLine()) {
+                cat.add(file.nextLine());
             }
 
+            return cat.toArray(new String[0]);
 
         } catch (FileNotFoundException e) {
             System.out.println(e);
