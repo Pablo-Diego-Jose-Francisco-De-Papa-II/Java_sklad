@@ -5,6 +5,7 @@ import java.io.*;
 import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -14,39 +15,35 @@ public class FileManager {
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
+        FileManager fileHandler = new FileManager(file);
 
         while (true) {
             System.out.println("What would you like to do: ");
 
-            switch (input.nextLine()) {
+            switch (input.nextLine().toLowerCase()) {
                 case "open", "o" -> {
                     System.out.println("Choose file to open: ");
-                    FileManager.openAndGetFile(input.nextLine());
+                    FileManager.openAndGetFile(input.next());
                 }
                 case "create", "c" -> {
                     System.out.println("What should the file be named: ");
-                    FileManager.createAndGetFile(input.nextLine());
+                    FileManager.createAndGetFile(input.next());
                 }
                 case "write", "w" -> {
-                    FileManager what = new FileManager(file);
                     System.out.println("What would you like to write: ");
-                    what.write(input.nextLine());
+                    fileHandler.write(input.nextLine());
                 }
-                case "writeAll", "wa" -> {
-                    FileManager what = new FileManager(file);
+                case "writeall", "wa" -> {
                     System.out.println("What would you like to write: ");
-                    what.writeAll(new String[]{});
+                    fileHandler.writeAll(input.nextLine().split(","));
                 }
                 case "read", "r" -> {
-                    FileManager what = new FileManager(file);
                     System.out.println("What line you want to read: ");
-                    System.out.println(what.read(input.nextInt()));
+                    System.out.println(fileHandler.read(input.nextInt()));
                 }
-                case "readAll", "ra" -> {
-                    FileManager what = new FileManager(file);
-
-                    for (String ble : what.readAll()) {
-                        System.out.println(ble);
+                case "readall", "ra" -> {
+                    for (String line : fileHandler.readAll()) {
+                        System.out.println(line);
                     }
                 }
                 case "end", "e" -> {
@@ -61,17 +58,11 @@ public class FileManager {
     }
 
     public static FileManager openAndGetFile(String fileName) {
-        try {
-            return new FileManager(new File(fileName));
-
-        } catch (Exception e) {
-            System.out.println(e);
-            return null;
-        }
+        return new FileManager(new File(fileName));
     }
 
     public static FileManager createAndGetFile(String fileName) {
-        File newFile = null;
+        File newFile;
 
         try {
             newFile = new File(fileName);
@@ -88,11 +79,11 @@ public class FileManager {
     public boolean write(String text) {
         try {
             FileWriter txtWriter = new FileWriter(file);
-
             Scanner input = new Scanner(text);
 
             txtWriter.write(input.nextLine());
             txtWriter.close();
+
             return true;
 
         } catch (IOException e) {
@@ -117,37 +108,38 @@ public class FileManager {
         }
     }
 
-    public String[] readAll() {
+    public String read(int t) {
         String targetLine = "";
-        ArrayList<String> cat = new ArrayList<String>();
+
+        try {
+            FileReader txtReader = new FileReader(file);
+            Scanner file = new Scanner(txtReader);
+
+            for (int i = 1; i <= t; i++) {
+                targetLine = file.nextLine();
+            }
+            
+            return targetLine;
+
+        } catch (IOException e) {
+            System.out.println(e);
+            return null;
+        }
+    }
+
+    public String[] readAll() {
+        String targetLine;
+        ArrayList<String> al = new ArrayList<String>();
 
         try {
             FileReader txtReader = new FileReader(file);
             Scanner file = new Scanner(txtReader);
 
             while (file.hasNextLine()) {
-                cat.add(file.nextLine());
+                al.add(file.nextLine());
             }
 
-            return cat.toArray(new String[0]);
-
-        } catch (FileNotFoundException e) {
-            System.out.println(e);
-            return null;
-        }
-    }
-
-    public String read(int y) {
-        String targetLine = null;
-
-        try {
-            FileReader txtReader = new FileReader(file);
-            Scanner file = new Scanner(txtReader);
-
-            for (int x = 1; x <= y; x++) {
-                targetLine = file.nextLine();
-            }
-            return targetLine;
+            return al.toArray(new String[0]);
 
         } catch (FileNotFoundException e) {
             System.out.println(e);
