@@ -11,6 +11,8 @@ import java.util.Scanner;
 
 public class FileManager {
     private static File file;
+    private static FileReader txtReader;
+    private static FileWriter txtWriter;
 
 
     public static void main(String[] args) {
@@ -55,6 +57,13 @@ public class FileManager {
 
     public FileManager(File file) {
         this.file = file;
+
+        try {
+            this.txtReader = new FileReader(file);
+            this.txtWriter = new FileWriter(file);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     public static FileManager openAndGetFile(String fileName) {
@@ -78,7 +87,6 @@ public class FileManager {
 
     public boolean write(String text) {
         try {
-            FileWriter txtWriter = new FileWriter(file);
             Scanner input = new Scanner(text);
 
             txtWriter.write(input.nextLine());
@@ -94,8 +102,6 @@ public class FileManager {
 
     public boolean writeAll(String[] text) {
         try {
-            FileWriter txtWriter = new FileWriter(file);
-
             for (String idk : text) {
                 txtWriter.write(idk);
             }
@@ -110,41 +116,25 @@ public class FileManager {
     }
 
     public String read(int t) {
+        Scanner file = new Scanner(txtReader);
         String targetLine = "";
 
-        try {
-            FileReader txtReader = new FileReader(file);
-            Scanner file = new Scanner(txtReader);
-
-            for (int i = 1; i <= t; i++) {
-                targetLine = file.nextLine();
-            }
-
-            return targetLine;
-
-        } catch (IOException e) {
-            System.out.println(e);
-            return null;
+        for (int i = 1; i <= t; i++) {
+            targetLine = file.nextLine();
         }
+
+        return targetLine;
     }
 
     public String[] readAll() {
+        Scanner file = new Scanner(txtReader);
         String targetLine;
         ArrayList<String> al = new ArrayList<String>();
-
-        try {
-            FileReader txtReader = new FileReader(file);
-            Scanner file = new Scanner(txtReader);
-
-            while (file.hasNextLine()) {
-                al.add(file.nextLine());
-            }
-
-            return al.toArray(new String[0]);
-
-        } catch (FileNotFoundException e) {
-            System.out.println(e);
-            return null;
+        
+        while (file.hasNextLine()) {
+            al.add(file.nextLine());
         }
+
+        return al.toArray(new String[0]);
     }
 }
