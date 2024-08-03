@@ -19,7 +19,6 @@ public class FileManager {
         Scanner input = new Scanner(System.in);
         FileManager fileHandler = null;
 
-
         while (true) {
             System.out.println("What would you like to do: ");
 
@@ -55,6 +54,7 @@ public class FileManager {
                     } else {
                         System.out.println("No file is open!");
                     }
+                    input.nextLine();
                 }
                 case "readall", "ra" -> {
                     if (fileHandler != null) {
@@ -85,7 +85,11 @@ public class FileManager {
     }
 
     public static FileManager openAndGetFile(String fileName) {
-        return new FileManager(new File(fileName));
+        if (new File(fileName).exists()) {
+            return new FileManager(new File(fileName));
+        } else {
+            return null;
+        }
     }
 
     public static FileManager createAndGetFile(String fileName) {
@@ -133,7 +137,7 @@ public class FileManager {
     public String read(int t) {
         Scanner file = new Scanner(txtReader);
         String targetLine = "";
-        
+
         for (int i = 1; i <= t; i++) {
             targetLine = file.nextLine();
         }
@@ -145,7 +149,7 @@ public class FileManager {
         Scanner file = new Scanner(txtReader);
         String targetLine;
         ArrayList<String> al = new ArrayList<String>();
-        
+
         while (file.hasNextLine()) {
             al.add(file.nextLine());
         }
