@@ -59,11 +59,9 @@ public class FileManager {
         this.file = file;
 
         try {
-            this.txtReader = new FileReader(file);
-            this.txtWriter = new FileWriter(file);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+            txtReader = new FileReader(file);
+            txtWriter = new FileWriter(file);
+        } catch (Exception e) {}
     }
 
     public static FileManager openAndGetFile(String fileName) {
@@ -80,13 +78,13 @@ public class FileManager {
             return new FileManager(file);
 
         } catch (IOException e) {
-            System.out.println(e);
             return null;
         }
     }
 
     public boolean write(String text) {
         try {
+            FileWriter txtWriter = new FileWriter(file);
             Scanner input = new Scanner(text);
 
             txtWriter.write(input.nextLine());
@@ -95,13 +93,14 @@ public class FileManager {
             return true;
 
         } catch (IOException e) {
-            System.out.println(e);
             return false;
         }
     }
 
     public boolean writeAll(String[] text) {
         try {
+            FileWriter txtWriter = new FileWriter(file);
+
             for (String idk : text) {
                 txtWriter.write(idk);
             }
@@ -110,31 +109,44 @@ public class FileManager {
             return true;
 
         } catch (IOException e) {
-            System.out.println(e);
             return false;
         }
     }
 
     public String read(int t) {
-        Scanner file = new Scanner(txtReader);
         String targetLine = "";
 
-        for (int i = 1; i <= t; i++) {
-            targetLine = file.nextLine();
-        }
+        try {
+            FileReader txtReader = new FileReader(file);
+            Scanner file = new Scanner(txtReader);
 
-        return targetLine;
+            for (int i = 1; i <= t; i++) {
+                targetLine = file.nextLine();
+            }
+
+            return targetLine;
+
+        } catch (IOException e) {
+            return null;
+        }
     }
 
     public String[] readAll() {
-        Scanner file = new Scanner(txtReader);
         String targetLine;
         ArrayList<String> al = new ArrayList<String>();
-        
-        while (file.hasNextLine()) {
-            al.add(file.nextLine());
-        }
 
-        return al.toArray(new String[0]);
+        try {
+            FileReader txtReader = new FileReader(file);
+            Scanner file = new Scanner(txtReader);
+
+            while (file.hasNextLine()) {
+                al.add(file.nextLine());
+            }
+
+            return al.toArray(new String[0]);
+
+        } catch (FileNotFoundException e) {
+            return null;
+        }
     }
 }
