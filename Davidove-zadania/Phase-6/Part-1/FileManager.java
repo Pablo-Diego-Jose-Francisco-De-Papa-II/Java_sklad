@@ -96,10 +96,11 @@ public class FileManager {
         try {
             FileWriter txtWriter = new FileWriter(file);
 
-            Scanner input = new Scanner(Arrays.toString(text));
-
-            txtWriter.write(input.nextLine());
+            for (String idk : text) {
+                txtWriter.write(idk);
+            }
             txtWriter.close();
+
             return true;
 
         } catch (IOException e) {
@@ -118,7 +119,7 @@ public class FileManager {
             for (int i = 1; i <= t; i++) {
                 targetLine = file.nextLine();
             }
-            
+
             return targetLine;
 
         } catch (IOException e) {
