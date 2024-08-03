@@ -10,14 +10,14 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class FileManager {
-    private static File file;
-    static FileReader txtReader;
-    static FileWriter txtWriter;
+    private File file;
+    private FileWriter txtWriter;
 
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         FileManager fileHandler = null;
+
 
         while (true) {
             System.out.println("What would you like to do: ");
@@ -79,14 +79,15 @@ public class FileManager {
         this.file = file;
 
         try {
-            txtReader = new FileReader(file);
             txtWriter = new FileWriter(file, true);
+
         } catch (Exception e) {}
     }
 
     public static FileManager openAndGetFile(String fileName) {
         if (new File(fileName).exists()) {
             return new FileManager(new File(fileName));
+
         } else {
             return null;
         }
@@ -99,7 +100,7 @@ public class FileManager {
             newFile = new File(fileName);
             newFile.createNewFile();
 
-            return new FileManager(file);
+            return new FileManager(newFile);
 
         } catch (IOException e) {
             return null;
@@ -135,25 +136,35 @@ public class FileManager {
     }
 
     public String read(int t) {
-        Scanner file = new Scanner(txtReader);
         String targetLine = "";
 
-        for (int i = 1; i <= t; i++) {
-            targetLine = file.nextLine();
-        }
+        try {
+            Scanner f = new Scanner(file);
+            for (int i = 1; i <= t; i++) {
+                targetLine = f.nextLine();
+            }
 
-        return targetLine;
+            return targetLine;
+
+        } catch (FileNotFoundException e) {
+            return null;
+        }
     }
 
     public String[] readAll() {
-        Scanner file = new Scanner(txtReader);
         String targetLine;
         ArrayList<String> al = new ArrayList<String>();
 
-        while (file.hasNextLine()) {
-            al.add(file.nextLine());
-        }
+        try {
+            Scanner f = new Scanner(file);
+            while (f.hasNextLine()) {
+                al.add(f.nextLine());
+            }
 
-        return al.toArray(new String[0]);
+            return al.toArray(new String[0]);
+
+        } catch (FileNotFoundException e) {
+            return null;
+        }
     }
 }
