@@ -75,26 +75,24 @@ public class FileManager {
         }
     }
 
-    public FileManager(File file) {
+    private FileManager(File file) throws IOException {
         this.file = file;
-
-        try {
-            txtWriter = new FileWriter(file, true);
-
-        } catch (Exception e) {}
+        this.txtWriter = new FileWriter(file, true);
     }
 
     public static FileManager openAndGetFile(String fileName) {
-        if (new File(fileName).exists()) {
-            return new FileManager(new File(fileName));
+        File f = new File(fileName);
 
-        } else {
+        try {
+            return f.exists() ? new FileManager(f) : null;
+
+        } catch (IOException e) {
             return null;
         }
     }
 
     public static FileManager createAndGetFile(String fileName) {
-        File newFile;
+        File newFile = null;
 
         try {
             newFile = new File(fileName);
@@ -112,7 +110,6 @@ public class FileManager {
             Scanner input = new Scanner(text);
 
             txtWriter.write(input.nextLine());
-            txtWriter.flush();
 
             return true;
 
@@ -126,7 +123,6 @@ public class FileManager {
             for (String idk : text) {
                 txtWriter.write(idk);
             }
-            txtWriter.flush();
 
             return true;
 
@@ -136,7 +132,7 @@ public class FileManager {
     }
 
     public String read(int t) {
-        String targetLine = "";
+        String targetLine = null;
 
         try {
             Scanner f = new Scanner(file);
@@ -152,7 +148,6 @@ public class FileManager {
     }
 
     public String[] readAll() {
-        String targetLine;
         ArrayList<String> al = new ArrayList<String>();
 
         try {
