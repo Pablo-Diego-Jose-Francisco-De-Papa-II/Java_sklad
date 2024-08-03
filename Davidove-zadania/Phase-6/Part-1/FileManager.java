@@ -9,15 +9,14 @@ import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-public class FileManager {
-    private File file;
-    private FileWriter txtWriter;
 
+public class FileManager {
+    private final File file;
+    private FileWriter txtWriter;
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         FileManager fileHandler = null;
-
 
         while (true) {
             System.out.println("What would you like to do: ");
@@ -50,11 +49,10 @@ public class FileManager {
                 case "read", "r" -> {
                     if (fileHandler != null) {
                         System.out.println("What line you want to read: ");
-                        System.out.println(fileHandler.read(input.nextInt()));
+                        System.out.println(fileHandler.read(Integer.parseInt(input.nextLine())));
                     } else {
                         System.out.println("No file is open!");
                     }
-                    input.nextLine();
                 }
                 case "readall", "ra" -> {
                     if (fileHandler != null) {
@@ -92,10 +90,8 @@ public class FileManager {
     }
 
     public static FileManager createAndGetFile(String fileName) {
-        File newFile = null;
-
         try {
-            newFile = new File(fileName);
+            File newFile = new File(fileName);
             newFile.createNewFile();
 
             return new FileManager(newFile);
@@ -107,9 +103,8 @@ public class FileManager {
 
     public boolean write(String text) {
         try {
-            Scanner input = new Scanner(text);
-
-            txtWriter.write(input.nextLine());
+            txtWriter.write(text);
+            txtWriter.flush();
 
             return true;
 
@@ -137,6 +132,10 @@ public class FileManager {
         try {
             Scanner f = new Scanner(file);
             for (int i = 1; i <= t; i++) {
+                if (i >= t) {
+                    return "Out of range!";
+                }
+
                 targetLine = f.nextLine();
             }
 
