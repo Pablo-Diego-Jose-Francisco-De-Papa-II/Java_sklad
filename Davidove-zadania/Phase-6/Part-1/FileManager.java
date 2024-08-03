@@ -11,13 +11,14 @@ import java.util.Scanner;
 
 public class FileManager {
     private static File file;
-    private static FileReader txtReader;
-    private static FileWriter txtWriter;
+    static FileReader txtReader;
+    static FileWriter txtWriter;
 
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        FileManager fileHandler = new FileManager(file);
+        FileManager fileHandler = null;
+
 
         while (true) {
             System.out.println("What would you like to do: ");
@@ -25,31 +26,50 @@ public class FileManager {
             switch (input.nextLine().toLowerCase()) {
                 case "open", "o" -> {
                     System.out.println("Choose file to open: ");
-                    FileManager.openAndGetFile(input.next());
+                    fileHandler = FileManager.openAndGetFile(input.nextLine());
                 }
                 case "create", "c" -> {
                     System.out.println("What should the file be named: ");
-                    FileManager.createAndGetFile(input.next());
+                    fileHandler = FileManager.createAndGetFile(input.nextLine());
                 }
                 case "write", "w" -> {
-                    System.out.println("What would you like to write: ");
-                    fileHandler.write(input.nextLine());
+                    if (fileHandler != null) {
+                        System.out.println("What would you like to write: ");
+                        fileHandler.write(input.nextLine());
+                    } else {
+                        System.out.println("No file is open!");
+                    }
                 }
                 case "writeall", "wa" -> {
-                    System.out.println("What would you like to write: ");
-                    fileHandler.writeAll(input.nextLine().split(","));
+                    if (fileHandler != null) {
+                        System.out.println("What would you like to write: ");
+                        fileHandler.writeAll(input.nextLine().split(","));
+                    } else {
+                        System.out.println("No file is open!");
+                    }
                 }
                 case "read", "r" -> {
-                    System.out.println("What line you want to read: ");
-                    System.out.println(fileHandler.read(input.nextInt()));
+                    if (fileHandler != null) {
+                        System.out.println("What line you want to read: ");
+                        System.out.println(fileHandler.read(input.nextInt()));
+                    } else {
+                        System.out.println("No file is open!");
+                    }
                 }
                 case "readall", "ra" -> {
-                    for (String line : fileHandler.readAll()) {
-                        System.out.println(line);
+                    if (fileHandler != null) {
+                        for (String line : fileHandler.readAll()) {
+                            System.out.println(line);
+                        }
+                    } else {
+                        System.out.println("No file is open!");
                     }
                 }
                 case "end", "e" -> {
                     return;
+                }
+                default -> {
+                    System.out.println("Unknown command!");
                 }
             }
         }
@@ -60,7 +80,7 @@ public class FileManager {
 
         try {
             txtReader = new FileReader(file);
-            txtWriter = new FileWriter(file);
+            txtWriter = new FileWriter(file, true);
         } catch (Exception e) {}
     }
 
@@ -84,11 +104,10 @@ public class FileManager {
 
     public boolean write(String text) {
         try {
-            FileWriter txtWriter = new FileWriter(file);
             Scanner input = new Scanner(text);
 
             txtWriter.write(input.nextLine());
-            txtWriter.close();
+            txtWriter.flush();
 
             return true;
 
@@ -99,12 +118,10 @@ public class FileManager {
 
     public boolean writeAll(String[] text) {
         try {
-            FileWriter txtWriter = new FileWriter(file);
-
             for (String idk : text) {
                 txtWriter.write(idk);
             }
-            txtWriter.close();
+            txtWriter.flush();
 
             return true;
 
@@ -114,39 +131,25 @@ public class FileManager {
     }
 
     public String read(int t) {
+        Scanner file = new Scanner(txtReader);
         String targetLine = "";
-
-        try {
-            FileReader txtReader = new FileReader(file);
-            Scanner file = new Scanner(txtReader);
-
-            for (int i = 1; i <= t; i++) {
-                targetLine = file.nextLine();
-            }
-
-            return targetLine;
-
-        } catch (IOException e) {
-            return null;
+        
+        for (int i = 1; i <= t; i++) {
+            targetLine = file.nextLine();
         }
+
+        return targetLine;
     }
 
     public String[] readAll() {
+        Scanner file = new Scanner(txtReader);
         String targetLine;
         ArrayList<String> al = new ArrayList<String>();
-
-        try {
-            FileReader txtReader = new FileReader(file);
-            Scanner file = new Scanner(txtReader);
-
-            while (file.hasNextLine()) {
-                al.add(file.nextLine());
-            }
-
-            return al.toArray(new String[0]);
-
-        } catch (FileNotFoundException e) {
-            return null;
+        
+        while (file.hasNextLine()) {
+            al.add(file.nextLine());
         }
+
+        return al.toArray(new String[0]);
     }
 }
