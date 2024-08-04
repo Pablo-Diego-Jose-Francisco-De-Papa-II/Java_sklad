@@ -131,16 +131,15 @@ public class FileManager {
 
         try {
             Scanner f = new Scanner(file);
-            for (int i = 1; i <= t; i++) {
-                if (i >= t) {
-                    return "Out of range!";
-                }
 
+            for (int i = 1; i <= t; i++) {
                 targetLine = f.nextLine();
             }
 
             return targetLine;
 
+        } catch (NoSuchElementException e) {
+            return "Out of range!";
         } catch (FileNotFoundException e) {
             return null;
         }
