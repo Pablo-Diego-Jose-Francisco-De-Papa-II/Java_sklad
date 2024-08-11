@@ -2,10 +2,7 @@ package DavitZadania.Zadanie6;
 
 
 import java.io.*;
-import java.lang.reflect.Array;
-import java.nio.file.Files;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -90,11 +87,10 @@ public class FileManager {
     }
 
     public static FileManager createAndGetFile(String fileName) {
-        try {
-            File newFile = new File(fileName);
-            newFile.createNewFile();
+        File newFile = new File(fileName);
 
-            return new FileManager(newFile);
+        try {
+            return newFile.createNewFile() ? new FileManager(newFile) : null;
 
         } catch (IOException e) {
             return null;
@@ -118,6 +114,7 @@ public class FileManager {
             for (String idk : text) {
                 txtWriter.write(idk);
             }
+            txtWriter.flush();
 
             return true;
 
@@ -139,7 +136,7 @@ public class FileManager {
             return targetLine;
 
         } catch (NoSuchElementException e) {
-            return "Out of range!";
+            return null;
         } catch (FileNotFoundException e) {
             return null;
         }
