@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.Arrays;
 
 
-public class UhrinovejHra {
+public class DifferentTypeOfNumGuesserGame {
     static Random rand = new Random();
     static Scanner input = new Scanner(System.in);
     static StringBuilder pandigitalNumber = new StringBuilder();
