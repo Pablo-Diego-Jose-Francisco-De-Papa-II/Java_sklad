@@ -1,4 +1,4 @@
-public class September-26th-2023 {
+public class September {
 	public static void main(String[] args) throws java.io.IOException {
 		char znak, answer = 'X';
 		
