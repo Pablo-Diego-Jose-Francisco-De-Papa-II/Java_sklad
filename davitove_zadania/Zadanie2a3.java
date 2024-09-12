@@ -3,7 +3,7 @@ import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Davitov_vadny_login_register_pindik {
+public class Zadanie2a3 {
 
     public static void main(String[] args) {
 
