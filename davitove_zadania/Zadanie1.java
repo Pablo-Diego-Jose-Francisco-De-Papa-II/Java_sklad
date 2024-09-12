@@ -1,7 +1,7 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
-public class Davitov_vadny_login_register_pindik {
+public class Zadanie1 {
 
     public static void main(String[] args) {
 
