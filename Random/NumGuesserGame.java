@@ -1,16 +1,11 @@
+package Random;
+
 import java.util.Scanner;
 import java.util.Random;
 import java.lang.Math;
 
-/* todo list
-* add user difficulty ✅
-* add helper ✅
-* maybe keep score
-* progressively increase dif
-* obmedzeny pocet hintov ✅
-* */
 
-public class GuessGame {
+public class NumGuesserGame {
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
