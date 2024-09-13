@@ -1,4 +1,4 @@
-package DavitZadania.Zadanie5;
+package Zadanie5;
 
 import java.util.Scanner;
 import java.util.HashMap;

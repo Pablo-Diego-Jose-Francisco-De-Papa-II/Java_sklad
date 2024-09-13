@@ -1,4 +1,4 @@
-package DavitZadania.Zadanie5;
+package Zadanie5;
 
 public class Clovek {
     String password;

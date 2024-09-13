@@ -1,3 +1,5 @@
+package Zadanie4;
+
 public class Clovek {
     String name;
     int age;

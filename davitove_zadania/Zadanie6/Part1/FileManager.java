@@ -1,4 +1,4 @@
-package DavitZadania.Zadanie6;
+package Zadanie6.Part1;
 
 
 import java.io.*;

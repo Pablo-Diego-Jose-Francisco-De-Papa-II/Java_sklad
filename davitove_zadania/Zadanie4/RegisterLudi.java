@@ -1,3 +1,6 @@
+package Zadanie4;
+
+
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -7,7 +10,7 @@ public class RegisterLudi {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
 
-        while (true) {t
+        while (true) {
             System.out.println("Enter your name: ");
             String name = input.nextLine();
 
